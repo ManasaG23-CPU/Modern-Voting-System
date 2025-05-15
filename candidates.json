@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Vijay",
+        "party": "TVK",
+        "manifesto": "Pirappokkum Ellaa Uyirkkum ",
+        "avatar": "Vijay_avatar_1747084920.jpeg",
+        "symbol": "Vijay_symbol_1747084920.jpeg"
+    },
+    {
+        "name": "Stalin",
+        "party": "DMK",
+        "manifesto": "Love, virtue, and power",
+        "avatar": "Stalin_avatar_1747109775.jpg",
+        "symbol": "Stalin_symbol_1747109775.jpg"
+    },
+    {
+        "name": "Palaniswamy",
+        "party": "ADMK",
+        "manifesto": "Peace , Prosperity and Progress",
+        "avatar": "Palaniswamy_avatar_1747116769.jpg",
+        "symbol": "Palaniswamy_symbol_1747116868.png"
+    }
+]

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Candidate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+            color: #4ecca3;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        input[type="file"] {
+            background: #ffffff;
+            color: #000;
+            padding: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4ecca3;
+            color: #1a1a2e;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #3ba886;
+        }
+
+        a {
+            display: block;
+            margin-top: 1rem;
+            color: #4ecca3;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .current-image {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Edit Candidate</h2>
+        {% if error %}
+            <p class="error-message">{{ error }}</p>
+        {% endif %}
+        <form action="{{ url_for('edit_candidate', name=candidate.name) }}" method="POST" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Candidate Name" value="{{ candidate.name }}" required>
+            <input type="text" name="party" placeholder="Party" value="{{ candidate.party }}" required>
+            <label>Current Avatar:</label>
+            <img src="{{ candidate.avatar_path }}" alt="{{ candidate.name }} Avatar" class="current-image">
+            <label>Upload New Avatar (optional):</label>
+            <input type="file" name="avatar" accept="image/*">
+            <label>Current Symbol:</label>
+            <img src="{{ candidate.symbol_path }}" alt="{{ candidate.name }} Symbol" class="current-image">
+            <label>Upload New Symbol (optional):</label>
+            <input type="file" name="symbol" accept="image/*">
+            <textarea name="manifesto" placeholder="Manifesto" rows="4" required>{{ candidate.manifesto }}</textarea>
+            <button type="submit"><i class="fas fa-save"></i> Save Changes</button>
+        </form>
+        <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+    </div>
+</body>
+</html>

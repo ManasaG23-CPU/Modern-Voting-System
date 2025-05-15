@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #16213e;
+            color: #ffffff;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .emoji {
+            font-size: 5rem;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #4ecca3;
+            border: none;
+            color: #1a1a2e;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .back-btn:hover {
+            background: #45b89d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="emoji">😊</h1>
+        <h2>Thank You for Voting!</h2>
+        <p>We appreciate your vote.</p>
+        <a href="{{ url_for('dashboard') }}" class="back-btn">Return to Daashboard</a>
+    </div>
+</body>
+</html>

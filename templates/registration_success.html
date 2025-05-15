@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful - Biometric Voting System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .success-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #4ecca3;
+            text-shadow: 0 0 10px rgba(78, 204, 163, 0.5);
+        }
+
+        .success-message {
+            font-size: 1.2rem;
+            color: #eeeeee;
+            margin-bottom: 2rem;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        button, a.button {
+            padding: 0.8rem;
+            border: none;
+            border-radius: 10px;
+            background: #4ecca3;
+            color: #1a1a2e;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover, a.button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(78, 204, 163, 0.3);
+        }
+
+        a.button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #eeeeee;
+        }
+
+        .image-section {
+            margin-top: 2rem;
+        }
+
+        .image-section img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <h1>Registration Successful</h1>
+        
+
+        
+        <p class="success-message">Congratulations, {{ username }}! You have successfully registered with the Biometric Voting System.</p>
+        
+        <div class="action-buttons">
+            <a href="{{ url_for('dashboard') }}" class="button"><i class="fas fa-tachometer-alt"></i> Proceed to Dashboard</a>
+            <!-- <a href="{{ url_for('landing_page') }}" class="button secondary"><i class="fas fa-home"></i> Back to Home</a> -->
+        </div>
+
+        <div class="image-section">
+            <img src="https://embed-ssl.wistia.com/deliveries/56f72d2d4b40a43ef2129a846840c01d.jpg?image_crop_resized=640x360" alt="Biometric Authentication">
+        </div>
+    </div>
+</body>
+</html>

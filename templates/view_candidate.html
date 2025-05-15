@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Candidate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .view-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+            color: #4ecca3;
+        }
+
+        .candidate-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #eeeeee;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .manifesto {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        a {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            margin-top: 1rem;
+            border: none;
+            border-radius: 10px;
+            background: #4ecca3;
+            color: #1a1a2e;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(78, 204, 163, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="view-container">
+        <h2>{{ candidate.name }}</h2>
+        <p><strong>Party:</strong> {{ candidate.party }}</p>
+        <p><strong>Avatar:</strong></p>
+        <img src="{{ candidate.avatar_path }}" alt="{{ candidate.name }} Avatar" class="candidate-image">
+        <p><strong>Symbol:</strong></p>
+        <img src="{{ candidate.symbol_path }}" alt="{{ candidate.name }} Symbol" class="candidate-image">
+        <p><strong>Manifesto:</strong></p>
+        <p class="manifesto">{{ candidate.manifesto }}</p>
+        <a href="{{ url_for('admin_dashboard') }}"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+    </div>
+</body>
+</html>

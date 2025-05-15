@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote - Biometric Voting System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .vote-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 10px;
+            width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+            color: #4ecca3;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .candidate {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .candidate:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .candidate img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 1rem;
+        }
+
+        .candidate-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .candidate-info h3 {
+            font-size: 1.2rem;
+            color: #eeeeee;
+        }
+
+        .candidate-info p {
+            font-size: 0.9rem;
+            color: #aaaaaa;
+        }
+
+        input[type="radio"] {
+            margin-right: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4ecca3;
+            color: #1a1a2e;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: #3ba886;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('vote-form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent immediate form submission
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        function(position) {
+                            // Set latitude and longitude in hidden inputs
+                            document.getElementById('latitude').value = position.coords.latitude;
+                            document.getElementById('longitude').value = position.coords.longitude;
+                            form.submit(); // Submit the form
+                        },
+                        function(error) {
+                            // Handle location access denied or errors
+                            console.error('Geolocation error:', error);
+                            // Submit form without location data
+                            document.getElementById('latitude').value = '';
+                            document.getElementById('longitude').value = '';
+                            form.submit();
+                        },
+                        { timeout: 10000 } // 10-second timeout
+                    );
+                } else {
+                    // Geolocation not supported
+                    alert('Geolocation is not supported by your browser.');
+                    document.getElementById('latitude').value = '';
+                    document.getElementById('longitude').value = '';
+                    form.submit();
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="vote-container">
+        <h2>Cast Your Vote</h2>
+        {% if error %}
+            <p class="error-message">{{ error }}</p>
+        {% endif %}
+        <form id="vote-form" action="{{ url_for('vote') }}" method="POST">
+            {% if candidates %}
+                {% for candidate in candidates %}
+                    <div class="candidate">
+                        <input type="radio" name="candidate" value="{{ candidate.name }}" required>
+                        <img src="{{ candidate.avatar_path }}" alt="{{ candidate.name }} Avatar">
+                        <div class="candidate-info">
+                            <h3>{{ candidate.name }}</h3>
+                            <p>{{ candidate.party }}</p>
+                        </div>
+                        <img src="{{ candidate.symbol_path }}" alt="{{ candidate.name }} Symbol">
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No candidates available.</p>
+            {% endif %}
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+            <button type="submit"><i class="fas fa-vote-yea"></i> Submit Vote</button>
+        </form>
+    </div>
+</body>
+</html>
